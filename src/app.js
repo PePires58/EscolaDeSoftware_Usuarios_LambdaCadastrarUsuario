@@ -14,23 +14,18 @@ exports.lambdaHandler = async (event, context) => {
             const resultPut = await putItemDynamoDbService.putUserOnDatabase(userPutItem);
 
             console.log(resultPut);
-            if (resultPut.ConsumedCapacity) {
-                return defaultResult({
-                    'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
-                });
-            }
-            else if (resultPut.$response.error.code === "ConditionalCheckFailed") {
-                return defaultResult({
-                    'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
-                });
-            }
-            else {
-                console.log(resultPut.$response.error);
-                return errorResult(500, 'Aconteceu algum problema ao criar o usuário');
-            }
+            return defaultResult({
+                'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
+            });
+
         }
 
     } catch (error) {
+        if (error.code === "ConditionalCheckFailed") {
+            return defaultResult({
+                'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
+            });
+        }
         return errorResult(500, error);
     }
 }

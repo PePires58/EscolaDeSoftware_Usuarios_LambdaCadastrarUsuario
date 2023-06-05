@@ -13,8 +13,5 @@ exports.putUserOnDatabase = async function (userItem) {
         .promise()
         .then((data) => {
             return data;
-        })
-        .catch((error) => {
-            return error
         });
 }
