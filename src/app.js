@@ -6,7 +6,7 @@ exports.lambdaHandler = async (event, context) => {
 
     try {
         const errors = validateUserObjectService.validateUserObject(event.body);
-        if (errors) {
+        if (errors.length > 0) {
             return errorResult(400, errors);
         }
         else {
