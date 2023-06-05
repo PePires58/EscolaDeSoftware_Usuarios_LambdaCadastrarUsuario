@@ -4,24 +4,19 @@ const putItemDynamoDbService = require('./services/put-item-dynamodb.service');
 
 exports.lambdaHandler = async (event, context) => {
 
+    const errors = validateUserObjectService.validateUserObject(event.body);
+    if (errors.length > 0)
+        return errorResult(400, errors);
+
+    const userPutItem = createPutItemObjectService.createUserPutItem(event.body);
     try {
-        const errors = validateUserObjectService.validateUserObject(event.body);
-        if (errors.length > 0) {
-            return errorResult(400, errors);
-        }
-        else {
-            const userPutItem = createPutItemObjectService.createUserPutItem(event.body);
-            const resultPut = await putItemDynamoDbService.putUserOnDatabase(userPutItem);
+        const resultPut = await putItemDynamoDbService.putUserOnDatabase(userPutItem);
 
-            console.log(resultPut);
-            return defaultResult({
-                'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
-            });
-
-        }
-
+        console.log(resultPut);
+        return defaultResult({
+            'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
+        });
     } catch (error) {
-        console.log(error.code);
         if (error.code === 'ConditionalCheckFailedException') {
 
             return defaultResult({
