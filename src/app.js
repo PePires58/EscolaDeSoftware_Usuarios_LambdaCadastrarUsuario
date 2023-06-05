@@ -21,11 +21,13 @@ exports.lambdaHandler = async (event, context) => {
         }
 
     } catch (error) {
-        console.log(error);
-        if (error.code === "ConditionalCheckFailed") {
+        console.log(typeof error);
+        if (typeof error === ConditionalCheckFailedException) {
+
             return defaultResult({
                 'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
             });
+
         }
         return errorResult(500, error);
     }
