@@ -13,13 +13,13 @@ exports.lambdaHandler = async (event, context) => {
         const resultPut = await putItemDynamoDbService.putUserOnDatabase(userPutItem);
 
         console.log(resultPut);
-        return defaultResult({
+        return defaultResult(200, {
             'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
         });
     } catch (error) {
         if (error.code === 'ConditionalCheckFailedException') {
 
-            return defaultResult({
+            return defaultResult(200, {
                 'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
             });
 
