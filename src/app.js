@@ -15,10 +15,14 @@ exports.lambdaHandler = async (event, context) => {
 
             console.log(resultPut);
             if (resultPut.ConsumedCapacity) {
-                return defaultResult('Usuário ' + userPutItem.email.S + ' criado com sucesso');
+                return defaultResult({
+                    'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
+                });
             }
             else if (resultPut.$response.error.code === "ConditionalCheckFailed") {
-                return defaultResult('Usuário ' + userPutItem.email.S + ' criado com sucesso');
+                return defaultResult({
+                    'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'
+                });
             }
             else {
                 console.log(resultPut.$response.error);
