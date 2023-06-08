@@ -5,6 +5,7 @@ const putItemDynamoDbService = require('./services/put-item-dynamodb.service');
 exports.lambdaHandler = async (event, context) => {
 
     const bodyJson = JSON.parse(event.body);
+
     const errors = validateUserObjectService.validateUserObject(bodyJson);
     if (errors.length > 0)
         return errorResult(400, errors);
