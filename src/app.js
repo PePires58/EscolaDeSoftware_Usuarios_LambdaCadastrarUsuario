@@ -20,7 +20,6 @@ exports.lambdaHandler = async (event, context) => {
         const resultMensagem = await sendMessageService
             .GravarMensagem(JSON.stringify(sendMessageObject));
 
-        console.log(resultMensagem);
         if (resultMensagem.MessageId) {
             return defaultResult(200, {
                 'Mensagem': 'Usuário ' + userPutItem.email.S + ' criado com sucesso'

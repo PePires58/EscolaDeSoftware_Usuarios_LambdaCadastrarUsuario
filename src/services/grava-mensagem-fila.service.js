@@ -9,8 +9,6 @@ exports.GravarMensagem = async function (mensagem) {
         QueueUrl: urlFila.QueueUrl
     };
 
-    console.log(params);
-
     return await sqs.sendMessage(params)
         .promise()
         .then((result) => { return result });
