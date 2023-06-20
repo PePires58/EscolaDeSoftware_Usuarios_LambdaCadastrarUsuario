@@ -2,17 +2,14 @@ const AWS = require('aws-sdk');
 const sqs = new AWS.SQS({ apiVersion: '2012-11-05' });
 
 exports.GravarMensagem = async function (mensagem) {
-    let urlFila = '';
-
-    await buscaUrlFila()
-        .then((urlFilaSqs) => {
-            urlFila = urlFilaSqs
-        });
+    let urlFila = await buscaUrlFila();
 
     const params = {
         MessageBody: mensagem,
-        QueueUrl: urlFila
+        QueueUrl: urlFila.QueueUrl
     };
+
+    console.log(params);
 
     return await sqs.sendMessage(params)
         .promise()
@@ -27,6 +24,6 @@ async function buscaUrlFila() {
     return await sqs.getQueueUrl(params)
         .promise()
         .then((data) => {
-            return data.QueueUrl
+            return data
         });
 }
