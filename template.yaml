@@ -8,6 +8,9 @@ Parameters:
   TableName:
     Description: Table Name
     Type: String
+  NomeFilaSqs:
+    Description: Nome da fila SQS
+    Type: String
 
 Resources:  
   UsuariosLambdaCriarUsuarioFn:
@@ -25,6 +28,7 @@ Resources:
       Environment:
         Variables:
           TableName: !Ref TableName
+          NomeFilaSqs: !Ref NomeFilaSqs
     Tags: 
       - Key: Ambiente
         Value: !Ref Environment
