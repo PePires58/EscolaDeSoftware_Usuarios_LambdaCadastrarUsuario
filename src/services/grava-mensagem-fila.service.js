@@ -2,7 +2,12 @@ const AWS = require('aws-sdk');
 const sqs = new AWS.SQS({ apiVersion: '2012-11-05' });
 
 exports.GravarMensagem = async function (mensagem) {
-    const urlFila = await buscaUrlFila();
+    let urlFila = '';
+
+    await buscaUrlFila()
+        .then((urlFilaSqs) => {
+            urlFila = urlFilaSqs
+        });
 
     const params = {
         MessageBody: mensagem,
