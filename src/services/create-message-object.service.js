@@ -2,7 +2,7 @@ exports.CreateObject = function (jsonBody) {
     return {
         email: jsonBody.email,
         nome: jsonBody.nome,
-        sobrenome: nome.sobrenome,
+        sobrenome: jsonBody.sobrenome,
         identification: {
             type: 'CPF',
             number: jsonBody.cpf
