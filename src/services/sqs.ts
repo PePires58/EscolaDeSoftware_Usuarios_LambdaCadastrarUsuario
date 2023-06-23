@@ -9,7 +9,7 @@ export class SQSService {
     private client: SQSClient;
 
     constructor() {
-        this.client = new SQSClient({ apiVersion: '2012-11-05' })
+        this.client = new SQSClient({ apiVersion: '2012-11-05', region: 'sa-east-1' })
     }
 
 
@@ -38,7 +38,7 @@ export class SQSService {
             nome: usuario.nome,
             sobrenome: usuario.sobrenome,
             identification: {
-                type: 'CPF',
+                type: "CPF",
                 number: usuario.cpf
             }
         });
