@@ -19,7 +19,7 @@ Resources:
       Description: register an user on database
       FunctionName: !Join ["_", [!Ref Environment, "escoladesoftware-usuarios-lambdacriarusuariofn"]]
       Handler: app.lambdaHandler
-      CodeUri: src/
+      CodeUri: src/built
       Runtime: nodejs18.x
       Timeout: 3
       Policies:
