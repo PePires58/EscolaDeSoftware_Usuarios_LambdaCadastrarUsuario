@@ -9,7 +9,7 @@ export class SQSService {
     private client: SQSClient;
 
     constructor() {
-        this.client = new SQSClient({ apiVersion: '2012-11-05', region: 'sa-east-1' })
+        this.client = new SQSClient({ apiVersion: '2012-11-05' })
     }
 
 

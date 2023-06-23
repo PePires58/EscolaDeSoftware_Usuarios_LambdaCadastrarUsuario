@@ -89,7 +89,7 @@ describe('Validate user Object Service tests', function () {
             email: 'pedrao@gmail.com',
             nome: 'pedrao',
             sobrenome: 'pires',
-            cpf: '11122233311',
+            cpf: '52998224725',
             senha: 'suasenha'
         }
 
