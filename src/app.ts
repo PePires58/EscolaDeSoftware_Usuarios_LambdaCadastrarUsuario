@@ -42,9 +42,9 @@ export const lambdaHandler = async (
     }
 }
 
-function errorResult(statusCode: number, errors: Erro[]) {
+function errorResult(statusCode: number, erros: Erro[]) {
     return defaultResult(statusCode, {
-        errors: errors
+        erros: erros
     });
 }
 
