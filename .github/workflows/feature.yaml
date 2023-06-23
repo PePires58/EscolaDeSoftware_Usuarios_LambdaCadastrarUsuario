@@ -1,4 +1,4 @@
-name: Development workflow - Lambda Function
+name: Build workflow - Feature
 on:
   push:
     branches: [feature**]
