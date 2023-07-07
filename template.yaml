@@ -8,6 +8,9 @@ Parameters:
   TableName:
     Description: Table Name
     Type: String
+  NomeFilaSqs:
+    Description: Nome da fila SQS
+    Type: String
 
 Resources:  
   UsuariosLambdaCriarUsuarioFn:
@@ -16,14 +19,16 @@ Resources:
       Description: register an user on database
       FunctionName: !Join ["_", [!Ref Environment, "escoladesoftware-usuarios-lambdacriarusuariofn"]]
       Handler: app.lambdaHandler
-      CodeUri: src/
+      CodeUri: src/built
       Runtime: nodejs18.x
-      Timeout: 2
+      Timeout: 3
       Policies:
         - AmazonDynamoDBFullAccess
+        - AmazonSQSFullAccess
       Environment:
         Variables:
           TableName: !Ref TableName
+          NomeFilaSqs: !Ref NomeFilaSqs
     Tags: 
       - Key: Ambiente
         Value: !Ref Environment
@@ -31,3 +36,16 @@ Resources:
         Value: Usuarios
       - Key: Servico
         Value: Lambda
+
+  UsuariosLambdaCriarUsuarioLogGroup: 
+    Type: AWS::Logs::LogGroup
+    Properties: 
+      LogGroupName: !Join ["", ["/aws/lambda/", !Ref Environment, "_escoladesoftware-usuarios-lambdacriarusuariofn"]]
+      RetentionInDays: 3
+      Tags: 
+        - Key: Ambiente
+          Value: !Ref Environment
+        - Key: Microservico
+          Value: Usuarios
+        - Key: Servico
+          Value: LogGroup
