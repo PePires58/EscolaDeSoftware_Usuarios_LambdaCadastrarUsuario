@@ -14,7 +14,14 @@ export const lambdaHandler = async (
 ): Promise<APIGatewayProxyResult> => {
 
     let erros: Erro[] = [];
-    const usuario: Usuario = JSON.parse(event.body || '');
+    let usuario: Usuario;
+
+    try {
+        usuario = JSON.parse(event.body || '');
+    }
+    catch {
+        usuario = new Usuario();
+    }
 
     erros = new UsuarioValidacoes().ValidarUsuario(usuario);
     if (erros.length > 0)
