@@ -15,6 +15,18 @@ describe('Validate user Object Service tests', function () {
             .not.null;
     });
 
+    it('Should have an error "Nome do usuário é obrigatório event with blanc space"', function () {
+
+        const userInput: Usuario = new Usuario();
+        userInput.nome = '     ';
+
+        const errors: Erro[] = new UsuarioValidacoes().ValidarUsuario(userInput);
+
+        expect(errors.length).greaterThan(0);
+        expect(errors.find(c => c.erro === "Nome do usuário é obrigatório"))
+            .not.null;
+    });
+
     it('Should have an error "Email do usuário é obrigatório"', function () {
         const userInput: Usuario = new Usuario();
         userInput.email = '';
@@ -24,7 +36,6 @@ describe('Validate user Object Service tests', function () {
         expect(errors.length).greaterThan(0);
         expect(errors.find(c => c.erro === "Email do usuário é obrigatório"))
             .not.null;
-
     });
 
     it('Should have an error "Nome do usuário é obrigatório"', function () {

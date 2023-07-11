@@ -16,18 +16,24 @@ export class UsuarioValidacoes {
                 erros.push(new Erro('Email do usuário é obrigatório'));
             else if (!new ValidaEmail().EmailEhValido(usuario.email))
                 erros.push(new Erro('Email inválido'));
-            if (!usuario.nome)
+
+            if (!usuario.nome.trim())
                 erros.push(new Erro('Nome do usuário é obrigatório'));
+            else if (usuario.nome.length < 3)
+                erros.push(new Erro('Nome do usuário deve ter ao menos 3 caracteres'));
             else if (usuario.nome.length > 50)
                 erros.push(new Erro('Nome do usuário deve ter no máximo 50 caracteres'));
+
             if (!usuario.sobrenome)
                 erros.push(new Erro('Sobrenome do usuário é obrigatório'));
             else if (usuario.sobrenome.length > 100)
                 erros.push(new Erro('Sobrenome do usuário deve ter no máximo 100 caracteres'))
+
             if (!usuario.cpf)
                 erros.push(new Erro('CPF do usuário é obrigatório'));
             else if (!new ValidaCPF().CpfEhValido(usuario.cpf))
                 erros.push(new Erro('CPF inválido'));
+
             if (!usuario.senha)
                 erros.push(new Erro('Senha do usuário é obrigatória'));
         }
