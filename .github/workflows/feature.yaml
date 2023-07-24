@@ -1,0 +1,9 @@
+name: Build workflow - Feature
+on:
+  push:
+    branches: [feature**]
+
+jobs:
+
+  Build-ts:
+    uses: PePires58/ReusableWorkflows/.github/workflows/005_typescript_build.yaml@main

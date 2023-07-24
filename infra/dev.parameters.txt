@@ -1,0 +1,3 @@
+Environment="dev",
+TableName="tbes_usuarios_dev",
+NomeFilaSqs="sqs_mercadopago_criacliente_dev"
